@@ -1,0 +1,15 @@
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\bin\Debug\net8.0\AdventOfCode2023.exe
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\bin\Debug\net8.0\AdventOfCode2023.deps.json
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\bin\Debug\net8.0\AdventOfCode2023.runtimeconfig.json
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\bin\Debug\net8.0\AdventOfCode2023.dll
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\bin\Debug\net8.0\AdventOfCode2023.pdb
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\obj\Debug\net8.0\AdventOfCode2023.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\obj\Debug\net8.0\AdventOfCode2023.AssemblyInfoInputs.cache
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\obj\Debug\net8.0\AdventOfCode2023.AssemblyInfo.cs
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\obj\Debug\net8.0\AdventOfCode2023.csproj.CoreCompileInputs.cache
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\obj\Debug\net8.0\AdventOfCode2023.sourcelink.json
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\obj\Debug\net8.0\AdventOfCode2023.dll
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\obj\Debug\net8.0\refint\AdventOfCode2023.dll
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\obj\Debug\net8.0\AdventOfCode2023.pdb
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\obj\Debug\net8.0\AdventOfCode2023.genruntimeconfig.cache
+C:\Users\Jessi\OneDrive\Documents\GitHub\AdventOfCode2023\AdventOfCode2023\obj\Debug\net8.0\ref\AdventOfCode2023.dll
