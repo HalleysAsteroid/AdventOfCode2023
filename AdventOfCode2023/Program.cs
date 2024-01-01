@@ -2,107 +2,63 @@
 using System.Text.RegularExpressions;
 
 String[] lines;
-
 lines = File.ReadAllLines("../../../../input.txt");
-int total = 0;
 
-for (int i = 0; i < lines.Length; i++)
-{
-    String s = "";
-    int j = 0;
-    foreach (char c in lines[i])
-    {
-        if (c >= 48 & c <= 57)
-        {
-            s += c;
-        }
-        switch (c)
-        {
-            case 'o':
-                {
-                    if (lines[i].Substring(j).Length >= 3 && lines[i].Substring(j, 3) == "one")
-                    {
-                        s += '1';
-                    }
-                    break;
-                }
-            case 't':
-                {
-                    if (lines[i].Substring(j).Length >= 3 && lines[i].Substring(j, 3) == "two")
-                    {
-                        s += '2';
-                    }
-                    if (lines[i].Substring(j).Length >= 5 && lines[i].Substring(j, 5) == "three")
-                    {
-                        s += '3';
-                    }
-                    break;
-                }
-            case 'f':
-                {
-                    if (lines[i].Substring(j).Length >= 4 && lines[i].Substring(j, 4) == "four")
-                    {
-                        s += '4';
-                    }
-                    if (lines[i].Substring(j).Length >= 4 && lines[i].Substring(j, 4) == "five")
-                    {
-                        s += '5';
-                    }
-                    break;
-                }
-            case 's':
-                {
-                    if (lines[i].Substring(j).Length >= 3 && lines[i].Substring(j, 3) == "six")
-                    {
-                        s += '6';
-                    }
-                    if (lines[i].Substring(j).Length >= 5 && lines[i].Substring(j, 5) == "seven")
-                    {
-                        s += '7';
-                    }
-                    break;
-                }
-            case 'e':
-                {
-                    if (lines[i].Substring(j).Length >= 5 && lines[i].Substring(j, 5) == "eight")
-                    {
-                        s += '8';
-                    }
-                    break;
-                }
-            case 'n':
-                {
-                    if (lines[i].Substring(j).Length >= 4 && lines[i].Substring(j, 4) == "nine")
-                    {
-                        s += '9';
-                    }
-                    break;
-                }
-            case 'z':
-                {
-                    if (lines[i].Substring(j).Length >= 4 && lines[i].Substring(j, 4) == "zero")
-                    {
-                        s += '0';
-                    }
-                    break;
-                }
-            default:
-                {
-                    break;
-                }
-        }
-        j++;
-    }
-    lines[i] = s;
-}
-Regex rx = new Regex("[^0-9-]");
+int gameSum = 0;
 
 foreach (String line in lines)
 {
-    String s = rx.Replace(line, "");
-    String t = "" + s[0] + s[s.Length - 1];
+    int gameID = int.Parse(line.Split(' ', ':')[1]);
+    int red = 0;
+    int green = 0;
+    int blue = 0;
+    bool validGame = true;
 
-    total += int.Parse(t);
+    String[] sets = line.Split(':')[1].Split(';');
+
+    foreach (String set in sets)
+    {
+        String[] cubes = { };
+        Array.Resize(ref cubes, cubes.Length + 1);
+
+        foreach (String cube in set.Split(','))
+        {
+            int num = int.Parse(cube.Substring(1).Split(' ')[0]);
+            String color = cube.Substring(1).Split(' ')[1];
+
+            switch (color)
+            {
+                case "red":
+                    {
+                        red += num;
+                        if (num > 12)
+                            validGame = false;
+                        break;
+                    }
+                case "green":
+                    {
+                        green += num;
+                        if (num > 13)
+                            validGame = false;
+                        break;
+                    }
+                case "blue":
+                    {
+                        blue += num;
+                        if (num > 14)
+                            validGame = false;
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+
+        }
+    }
+    if (validGame)
+        gameSum += gameID;
+
 }
-
-Console.WriteLine(total);
+Console.WriteLine(gameSum);
