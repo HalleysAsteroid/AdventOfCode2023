@@ -4,23 +4,18 @@ using System.Text.RegularExpressions;
 String[] lines;
 lines = File.ReadAllLines("../../../../input.txt");
 
-int gameSum = 0;
+int sum = 0;
 
 foreach (String line in lines)
 {
-    int gameID = int.Parse(line.Split(' ', ':')[1]);
     int red = 0;
     int green = 0;
     int blue = 0;
-    bool validGame = true;
 
     String[] sets = line.Split(':')[1].Split(';');
 
     foreach (String set in sets)
     {
-        String[] cubes = { };
-        Array.Resize(ref cubes, cubes.Length + 1);
-
         foreach (String cube in set.Split(','))
         {
             int num = int.Parse(cube.Substring(1).Split(' ')[0]);
@@ -30,23 +25,20 @@ foreach (String line in lines)
             {
                 case "red":
                     {
-                        red += num;
-                        if (num > 12)
-                            validGame = false;
+                        if (red < num)
+                            red = num;
                         break;
                     }
                 case "green":
                     {
-                        green += num;
-                        if (num > 13)
-                            validGame = false;
+                        if (green < num)
+                            green = num;
                         break;
                     }
                 case "blue":
                     {
-                        blue += num;
-                        if (num > 14)
-                            validGame = false;
+                        if (blue < num)
+                            blue = num;
                         break;
                     }
                 default:
@@ -57,8 +49,6 @@ foreach (String line in lines)
 
         }
     }
-    if (validGame)
-        gameSum += gameID;
-
+    sum += (red * green * blue);
 }
-Console.WriteLine(gameSum);
+Console.WriteLine(sum);
