@@ -3,52 +3,67 @@ using System.Text.RegularExpressions;
 
 String[] lines;
 lines = File.ReadAllLines("../../../../input.txt");
-
 int sum = 0;
 
-foreach (String line in lines)
+for (int y = 0; y < 140; y++)
 {
-    int red = 0;
-    int green = 0;
-    int blue = 0;
-
-    String[] sets = line.Split(':')[1].Split(';');
-
-    foreach (String set in sets)
+    Console.WriteLine(lines[y].Length);
+    for (int x = 0; x < 140; x++)
     {
-        foreach (String cube in set.Split(','))
+        Console.WriteLine(x);
+        if (lines[y][x] >= 48 & lines[y][x] <= 57)
         {
-            int num = int.Parse(cube.Substring(1).Split(' ')[0]);
-            String color = cube.Substring(1).Split(' ')[1];
-
-            switch (color)
+            String num = "";
+            bool isPartNum = false;
+            while (x < 140 && lines[y][x] >= 48 && lines[y][x] <= 57)
             {
-                case "red":
-                    {
-                        if (red < num)
-                            red = num;
-                        break;
-                    }
-                case "green":
-                    {
-                        if (green < num)
-                            green = num;
-                        break;
-                    }
-                case "blue":
-                    {
-                        if (blue < num)
-                            blue = num;
-                        break;
-                    }
-                default:
-                    {
-                        break;
-                    }
-            }
+                num += lines[y][x];
 
+                if (x != 0)
+                {
+                    if (y != 0)
+                        if (lines[y - 1][x - 1] == 47 || lines[y - 1][x - 1] < 46 || lines[y - 1][x - 1] > 57)
+                            isPartNum = true;
+                    if (lines[y][x - 1] == 47 || lines[y][x - 1] < 46 || lines[y][x - 1] > 57)
+                        isPartNum = true;
+                    if (y < lines.Length - 1)
+                        if (lines[y + 1][x - 1] == 47 || lines[y + 1][x - 1] < 46 || lines[y + 1][x - 1] > 57)
+                            isPartNum = true;
+                }
+                if (y > 0)
+                    if (lines[y - 1][x] == 47 || lines[y - 1][x] < 46 || lines[y - 1][x] > 57)
+                        isPartNum = true;
+                if (y < 140 - 1)
+                    if (lines[y + 1][x] == 47 || lines[y + 1][x] < 46 || lines[y + 1][x] > 57)
+                        isPartNum = true;
+                if (x < 140 - 1)
+                {
+                    if (y > 0)
+                        if (lines[y - 1][x + 1] == 47 || lines[y - 1][x + 1] < 46 || lines[y - 1][x + 1] > 57)
+                            isPartNum = true;
+                    if (lines[y][x + 1] == 47 || lines[y][x + 1] < 46 || lines[y][x + 1] > 57)
+                        isPartNum = true;
+                    if (y < 140 - 1)
+                        if (lines[y + 1][x + 1] == 47 || lines[y + 1][x + 1] < 46 || lines[y + 1][x + 1] > 57)
+                            isPartNum = true;
+                }
+
+                x++;
+            }
+            // Console.WriteLine(num);
+            if (isPartNum)
+                sum += int.Parse(num);
+            //is a number
         }
+        else if (lines[y][x] == 46)
+        {
+            //is a periodt
+        }
+        else
+        {
+            //is a symbol
+        }
+
     }
-    sum += (red * green * blue);
 }
 Console.WriteLine(sum);
