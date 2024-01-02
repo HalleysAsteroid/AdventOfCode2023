@@ -1,69 +1,68 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System.Text.RegularExpressions;
-
-String[] lines;
+﻿String[] lines;
 lines = File.ReadAllLines("../../../../input.txt");
 int sum = 0;
 
-for (int y = 0; y < 140; y++)
+// Y coordinate; moves vertically through input
+for (int y = 0; y < lines.Length; y++)
 {
-    Console.WriteLine(lines[y].Length);
-    for (int x = 0; x < 140; x++)
+    // X coordinate: moves horizontally through each line of input
+    for (int x = 0; x < lines[y].Length; x++)
     {
-        Console.WriteLine(x);
-        if (lines[y][x] >= 48 & lines[y][x] <= 57)
+        // Checks if coordinate y,x has an asterisk
+        if (lines[y][x] == '*')
         {
-            String num = "";
-            bool isPartNum = false;
-            while (x < 140 && lines[y][x] >= 48 && lines[y][x] <= 57)
+            int[] nums = [];
+            string[] coords = [];
+
+            // Modifier for Y coordinate; moves vertically centered on gear
+            for (int i = -1; i < 2; i++)
             {
-                num += lines[y][x];
-
-                if (x != 0)
+                // Modifier for X coordinate; moves horizontally centered on gear
+                for (int j = -1; j < 2; j++)
                 {
-                    if (y != 0)
-                        if (lines[y - 1][x - 1] == 47 || lines[y - 1][x - 1] < 46 || lines[y - 1][x - 1] > 57)
-                            isPartNum = true;
-                    if (lines[y][x - 1] == 47 || lines[y][x - 1] < 46 || lines[y][x - 1] > 57)
-                        isPartNum = true;
-                    if (y < lines.Length - 1)
-                        if (lines[y + 1][x - 1] == 47 || lines[y + 1][x - 1] < 46 || lines[y + 1][x - 1] > 57)
-                            isPartNum = true;
-                }
-                if (y > 0)
-                    if (lines[y - 1][x] == 47 || lines[y - 1][x] < 46 || lines[y - 1][x] > 57)
-                        isPartNum = true;
-                if (y < 140 - 1)
-                    if (lines[y + 1][x] == 47 || lines[y + 1][x] < 46 || lines[y + 1][x] > 57)
-                        isPartNum = true;
-                if (x < 140 - 1)
-                {
-                    if (y > 0)
-                        if (lines[y - 1][x + 1] == 47 || lines[y - 1][x + 1] < 46 || lines[y - 1][x + 1] > 57)
-                            isPartNum = true;
-                    if (lines[y][x + 1] == 47 || lines[y][x + 1] < 46 || lines[y][x + 1] > 57)
-                        isPartNum = true;
-                    if (y < 140 - 1)
-                        if (lines[y + 1][x + 1] == 47 || lines[y + 1][x + 1] < 46 || lines[y + 1][x + 1] > 57)
-                            isPartNum = true;
-                }
 
-                x++;
+                    // Checks every tile in input for a digit character
+                    if (lines[y + i][x + j] >= '0' && lines[y + i][x + j] <= '9')
+                    {
+                        int minX = int.MaxValue;
+                        String num = "";
+
+                        // Goes as far left as possible on each number and records the X coordinate of the first digit
+                        for (int k = 0; x + j + k >= 0 && lines[y + i][x + j + k] >= '0' && lines[y + i][x + j + k] <= '9'; k--)
+                            minX = x + j + k;
+
+                        // Records value of the number found as a string
+                        for (int k = 0; minX + k < lines[y].Length && lines[y + i][minX + k] >= '0' && lines[y + i][minX + k] <= '9'; k++)
+                            num += lines[y + i][minX + k];
+
+                        // If the coordinate of the number found does not already exist in the "coords" array...
+                        if (!coords.Contains(minX + ", " + (y + i)))
+                        {
+                            // Expand each array,
+                            Array.Resize(ref nums, nums.Length + 1);
+                            Array.Resize(ref coords, coords.Length + 1);
+                            // input the found number as an int...
+                            nums[^1] = int.Parse(num);
+                            // and input the coordinate pair as a string in the form "x, y".
+                            coords[^1] = minX + ", " + (y + i);
+                            Console.WriteLine("Integer " + num + " found at coordinates " + (y + i) + ", " + minX + "-" + (minX + num.Length));
+                        }
+                    }
+                } // End of row surrounding asterisk
+            } // Finished processing asterisk
+
+            if (nums.Length == 2)
+            {
+                Console.WriteLine("Two numbers found: " + nums[0] + " and " + nums[1]);
+                Console.WriteLine(nums[0] + " * " + nums[1] + " added to sum.");
+                sum += nums[0] * nums[1];
+                Console.WriteLine("Sum is now " + sum);
             }
-            // Console.WriteLine(num);
-            if (isPartNum)
-                sum += int.Parse(num);
-            //is a number
+            else if (nums.Length == 1)
+            {
+                Console.WriteLine("Only one number found: " + nums[0]);
+            }
         }
-        else if (lines[y][x] == 46)
-        {
-            //is a periodt
-        }
-        else
-        {
-            //is a symbol
-        }
-
     }
 }
-Console.WriteLine(sum);
+Console.WriteLine("The sum of the Gear Ratios is " + sum);
