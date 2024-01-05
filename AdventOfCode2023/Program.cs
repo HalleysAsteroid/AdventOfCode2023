@@ -2,20 +2,36 @@
 lines = File.ReadAllLines("../../../../input.txt");
 int sum = 0;
 
-foreach (String line in lines)
+for (int i = 0; i < lines.Length; i++)
 {
-    int points = 0;
+    sum += CardCounter(i);
+}
+Console.WriteLine(sum);
 
-    foreach (string cardNum in line.Split(':')[1].Split('|')[1].Split(' '))
+static int CardCounter(int cardID)
+{
+    String[] lines;
+    lines = File.ReadAllLines("../../../../input.txt");
+
+
+    int winners = 0;
+    int sum;
+
+
+    foreach (string cardNum in lines[cardID - 1].Split(':')[1].Split('|')[1].Split(' '))
     {
-        if ((cardNum != "") && line.Split(':')[1].Split('|')[0].Split(' ').Contains(cardNum))
+        if ((cardNum != "") && lines[cardID - 1].Split(':')[1].Split('|')[0].Split(' ').Contains(cardNum))
         {
-            if (points == 0)
-                points = 1;
-            else points = points * 2;
+            winners++;
+
         }
 
     }
-    sum += points;
+
+    for (int i = 0; i < winners; i++)
+
+
+
+
+
 }
-Console.WriteLine(sum);
